@@ -70,7 +70,9 @@ for each in country_total:
     boxplot_data.append(country_total[each])
 
 # top subplot
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(7, 7), gridspec_kw={'height_ratios': [4, 1]}, tight_layout=True, sharex=True)
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(7, 7), 
+                               gridspec_kw={'height_ratios': [4, 1]},
+                               tight_layout=True, sharex=True)
 ax1.set_title('Average International Coffee Supplier Rating (Top 10)')
 ax1.boxplot(boxplot_data,)
 ax1.set_ylabel('Average Rating (out of 90)')
@@ -180,7 +182,6 @@ np.triu(np.ones(df_dunn.shape)).astype(np.bool)
 df_dunn = df_dunn.where(np.triu(np.ones(df_dunn.shape)).astype(np.bool))
 df_dunn = df_dunn.round(6)
 print(tabulate(df_dunn, headers='keys', tablefmt='psql'))
-df_dunn.to_csv('dunn_results.csv')
 
 # Matplotlib table
 fig, ax = plt.subplots(figsize=(18, 8))
@@ -189,7 +190,8 @@ fig.patch.set_visible(False)
 ax.axis('off')
 ax.axis('tight')
 
-table = ax.table(cellText=df_dunn.to_numpy(), colLabels=top10_countries, loc='center')
+table = ax.table(cellText=df_dunn.to_numpy(), colLabels=top10_countries,
+                 loc='center')
 table.set_fontsize(30)
 #table.scale(1.8, 1.8)
 fig.tight_layout()
@@ -228,11 +230,12 @@ eig_vals, eig_vecs = np.linalg.eig(covariance_mat)
 # Covariance matrix
 # if positive, two variables increase/decrease together (correlated)
 # if negative, two variables go opposite directions (inversely correlated)
-print(covariance_mat)
-print('Eigenvectors \n%s' %eig_vecs)
-print('\nEigenvalues \n%s' %eig_vals)
-print()
-
+print('Covariance matrix')
+print(tabulate(covariance_mat))
+print('Eigenvectors')
+print(tabulate(eig_vecs))
+print('Eigenvalues')
+print(eig_vals)
 # check if eigenvectors are all units of 1
 for ev in eig_vecs:
     np.testing.assert_array_almost_equal(1.0, np.linalg.norm(ev))
@@ -274,7 +277,7 @@ table = ax.table(cellText=df_components.to_numpy(),
                  colLabels=['Eigenvalues', 'Cumulative Variance', 
                             'Individual Variance'],
                  loc='center')
-table.set_fontsize(30)
+table.set_fontsize(10)
 #table.scale(1.8, 1.8)
 fig.tight_layout()
 
@@ -285,6 +288,26 @@ df_PCA = pd.DataFrame(data=principal_components, columns=
                     ['PC1', 'PC2', 'PC3'])
 df_PCA = pd.concat([df_PCA, df1.iloc[:, 0]], axis =1)
 
+df_importance = pd.DataFrame(pca.components_, columns=features)
+df_importance.insert(0, 'Components', ['PC1','PC2', 'PC3'])
+print(tabulate(df_importance, headers='keys', tablefmt='psql'))
+
+# Matplotlib table 
+fig, ax = plt.subplots(figsize=(7, 7))
+# hide axes
+fig.patch.set_visible(False)
+ax.axis('off')
+ax.axis('tight')
+
+test = ['Components', 'Aroma', 'Flavor', 'Aftertaste', 'Acidity', 'Body',
+        'Balance','Uniformity', 'Clean.Cup', 'Sweetness']
+able = ax.table(cellText=df_importance.round(2).to_numpy(),
+                colLabels=test,loc='center')
+table.set_fontsize(80)
+#table.scale(1.2, 1.2)
+fig.tight_layout()
+
+# 3D Visualization
 fig = plt.figure(figsize=(7, 7))
 ax = plt.axes(projection='3d')
 ax.set_xlabel('PC1 (61.52%)', fontsize = 10)
