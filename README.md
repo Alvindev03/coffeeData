@@ -29,7 +29,7 @@ The data was collected in 2018 and I focused on these particular measures of qua
 ## Methods
 
 ### Q1: 
-* Ranked Barchar and Boxplots
+* Ranked bar chart and boxplots
 
 ### Q2
 * Shapiro-Wilks and D'Agostino-Pearson: test normality
