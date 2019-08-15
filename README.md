@@ -1,9 +1,10 @@
 # Coffee Quality Analysis
 Welcome to my Coffee Quality Analysis project!
 
-The dataset for this project was taken from [jldbc](https://github.com/jldbc/coffee-quality-database). I wanted to practice my data analysis skills and decided to use this particular dataset coffee from different parts of the world using data.
+The dataset for this project was taken from [jldbc](https://github.com/jldbc/coffee-quality-database). I wanted to practice my data analysis skills and decided to use this particular dataset to understand if coffee reviews from different parts of the world differ.
 
-The data comes from the 2015 Coffee Quality Institute and I focused on these particular measures of quality (features):
+## Data
+The data was collected in 2018 and I focused on these particular measures of quality (features):
 
 * Aroma
 * Flavor
