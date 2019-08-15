@@ -28,9 +28,9 @@ df1 = df1.rename(columns={'Country.of.Origin': 'Country'})
 country_list = df1['Country'].unique().tolist()
 country_list.pop(-2) # removes 'nan' country
 
-df_histogram = pd.DataFrame(df1['Country'].value_counts())
-df_histogram.reset_index(level=0, inplace=True)
-df_histogram.columns=['Country', 'Number of Suppliers']
+df_barchart = pd.DataFrame(df1['Country'].value_counts())
+df_barchart.reset_index(level=0, inplace=True)
+df_barchart.columns=['Country', 'Number of Suppliers']
 
 """
 1. Which country has the most coffee suppliers tested?
@@ -38,12 +38,12 @@ df_histogram.columns=['Country', 'Number of Suppliers']
 
 Since ~82% of coffee supplies are from the top 10 countries, I will be focusing 
 on them for the remainder of analysis
-print(df_histogram['Number of Suppliers'][0:10].sum()/
-      df_histogram['Number of Suppliers'].sum())
+print(df_barchart['Number of Suppliers'][0:10].sum()/
+      df_barchart['Number of Suppliers'].sum())
 """
-# frequency histogram
-x = df_histogram['Country']
-y = df_histogram['Number of Suppliers']
+# frequency barchart
+x = df_barchart['Country']
+y = df_barchart['Number of Suppliers']
 
 fig, ax1 = plt.subplots(figsize=(10, 5), tight_layout=True) 
 # figsize = (length, width)
@@ -52,14 +52,14 @@ ax1.bar(x, y, width=0.8)
 ax1.set_ylabel('Number of Suppliers')
 ax1.set_xlabel('Countries')
 ax1.set_title('Coffee Suppliers Around the World')
-plt.xticks(x, df_histogram['Country'], rotation=90, fontsize=10)
+plt.xticks(x, df_barchart['Country'], rotation=90, fontsize=10)
 
 """
 2. What is the average total rating of each country's coffee? 
 # out of 90 total points
 """
 df1['Total'] = df1.sum(axis=1)
-top10_countries = df_histogram['Country'].tolist()[:10]
+top10_countries = df_barchart['Country'].tolist()[:10]
 
 country_total = {}
 for each in top10_countries:
@@ -128,8 +128,8 @@ for each in top10_countries:
 
     print()
 """
-3b. One-way ANOVA or Kruskall-Wallis test
-* Kruskall-Wallis nonparametric test b/c data is abnormal
+3b. Kruskal-Wallis test
+* Kruskal-Wallis nonparametric test b/c data is abnormal
 """
 Mexico_samples = country_total['Mexico'].tolist()
 Colombia_samples = country_total['Colombia'].tolist()
@@ -148,7 +148,7 @@ kruskal_calc_p = stats.kruskal(Mexico_samples, Colombia_samples,
                                Honduras_samples, Costa_Rica_samples,
                                Ethiopia_samples, Tanzania_samples)[1]
 
-print('Kruskall-Wallis Result: ', kruskal_calc_p)
+print('Kruskal-Wallis Result: ', kruskal_calc_p)
 if kruskal_calc_p > 0.05:
     print('Not significant: fail to reject H0')
 else:
@@ -329,7 +329,7 @@ for target, color in zip(targets,colors):
                  df_PCA.loc[indicesToKeep, 'PC3'],
                  label=target,
                  c = color,
-                 s = 15)
+                 s = 5)
 plt.legend(loc=2, prop={'size': 8})
 plt.show()
 
