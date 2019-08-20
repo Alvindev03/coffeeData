@@ -2,7 +2,7 @@
 Welcome to my Coffee Quality Analysis project!
 
 ## Motivation
-This a personal project to help practice my data analysis skills in Python for an interesting dataset. While I've drank coffee for many years, I've never really explored where coffee comes from and the resulting differences in taste. I figured playing with this dataset will help give me some insight on which types of coffee I could start exploring as I try different coffee. 
+This a personal project to help practice my Python data analysis skills. While I've drank coffee for many years, I've never explored where coffee comes from and the resulting differences in taste. I figured playing with this dataset will help give me insight on understanding the different types of coffee qualities and hopefully any differences based on its country of origin. 
 
 ## Summary
 Coffee Quality Institute coffee quality data was analyzed to determine the top countries with the most coffee review and country with the highest quality coffee.
@@ -54,7 +54,7 @@ Note: I am only working with arabica (vs. robusta) since it has a larger dataset
 
 ### Data Exploration
 
-![Heatmap](https://raw.githubusercontent.com/timmy224/Coffee_Quality_Analysis/master/images/Heatmap.png?token=AE6IWOA3LE5D3E46VF2HDR25LQJ5Y)
+![Heatmap](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Pearson_Heatmap.png?raw=true)
 
 ![Box plot](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Overall_Coffee_Quality.png?raw=true)
 
