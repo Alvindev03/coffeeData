@@ -2,14 +2,16 @@
 Welcome to my Coffee Quality Analysis project!
 
 ## Motivation
-This was my first personal project to help teach myself how to analyze data in Python. I wanted to practice my data analysis skills and decided to use this particular dataset to understand if coffee reviews from different parts of the world differ. 
+This a personal project to help practice my data analysis skills in Python for an interesting dataset. While I've drank coffee for many years, I've never really explored where coffee comes from and the resulting differences in taste. I figured playing with this dataset will help give me some insight on which types of coffee I could start exploring as I try different coffee. 
+
+## Summary
+Coffee Quality Institute coffee quality data was analyzed to determine the top countries with the most coffee review and country with the highest quality coffee.
+Mexico was found to be the most reviewed country with a total of 236 reviews and Ethiopia was determined to have the highest quality coffee. A principal component analysis was also conducted, but data failed to capture enough variance to discern between coffee belonging to different countries. 
 
 ## Data
-The dataset for this project was taken from [jldbc](https://github.com/jldbc/coffee-quality-database), who collected this in 2018 and I focused on these 
-particular measures of quality (features):
+The dataset for this project was taken from Github user: [jldbc](https://github.com/jldbc/coffee-quality-database), who collected this in 2018. Each quality rating has a score from 0 to 10 with the maximum total points of 100 and has been rated by trained coffee tasters. 
 
-Note: I am only working with arabica (vs. robusta) since it has a larger dataset to work with. 
-
+For my project, I focused on these particular measures of coffee quality:
 * Aroma
 * Flavor
 * Aftertaste
@@ -19,76 +21,81 @@ Note: I am only working with arabica (vs. robusta) since it has a larger dataset
 * Uniformity
 * Cup Cleanliness
 * Sweetness
+* Cupper Points
+
+Note: I am only working with arabica (vs. robusta) since it has a larger dataset to work with. 
 
 ## Questions
 
-1. In this dataset, which countries produce the most coffee?
+1. Which countries have most amount of coffee ratings?
 
-2. Are the average total ratings of coffee from the top 10 country similar?
+2. Of the top 10 countries, which country has best quality coffee?
 
-3. Do we need all category ratings to describe the coffee?
-
-4. Is there one quality or few qualities which can predict overall coffee quality?
+3. Can we classify coffee from different countries based on coffee quality ratings?
   
 ## Methods
 
+### Data Exploration
+    1. Pearson Correlation Matrix
+    2. Boxplots
+    3. Kernel Density Estimation Distribution
+
 ### Q1: 
-* Ranked bar chart and boxplots
+* Ranked bar chart
 
 ### Q2
-* Shapiro-Wilks and D'Agostino-Pearson: test normality
-* Kruskal-Wallis: Non parametric test for similarity between groups
-* Dunn Test: identify different groups
+* Boxplots for each country
+* Median value taken instead of mean due too outliers
 
 ###  Q3
 * PCA: Reduce dimensions and visualization
 
 ## Results
 
+### Data Exploration
+
+![Heatmap](https://raw.githubusercontent.com/timmy224/Coffee_Quality_Analysis/master/images/Heatmap.png?token=AE6IWOA3LE5D3E46VF2HDR25LQJ5Y)
+
+![Box plot](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Overall_Coffee_Quality.png?raw=true)
+
+![Density distribution](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Overall_Coffee_Quality_Dist.png?raw=true)
+
 ### Q1
-Top 10 coffee suppliers are:
-1. Mexico
-2. Colombia
-3. Guatemala
-4. Brazil
-5. Taiwan
-6. United States (Hawaii)
-7. Honduras
-8. Costa Rica
-9. Ethiopia
-10. Tanzania
+Top 10 coffee suppliers are: 
+(Country, Number of Reviews)
+1. Mexico                  236
+2. Colombia                183
+3. Guatemala               181
+4. Brazil                  132
+5. Taiwan                   75
+6. United States (Hawaii)   73
+7. Honduras                 53
+8. Costa Rica               51
+9. Ethiopia                 44
+10. Tanzania                40
 
-![Frequency bar chart](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Figure_1.png?raw=true)
-
- 
-
-![Box plot](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Figure_2.png?raw=true)
+![Frequency bar chart](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Coffee_Suppliers.png?raw=true)
 
 ### Q2
+Because there were many outliers within dataset and I did not want to trim since they are valid in this dataset, I decided to look for the country with the highest
+median value in each quality category. 
 
-The majority of each group (countries) had an non-Gaussian distribution.
+Ethiopia's coffee had the highest ratings for each category except for uniformity, clean cup, and sweetness where all countries shared the same median value of 10.
 
-Kruskal-Wallis test determined there were differences in overall coffee quality and Dunn Test identified some groups to be different (see image).
+![Ethiopia](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Ethiopia_Coffee_Quality.png?raw=true)
 
-  
-![Dunn Test](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Figure_3.png?raw=true)
-
+Please see the images folder for coffee quality ratings of other countries.
 
 ### Q3
+When examining covariance, three principal components captured 75.15% of explained variance.
+![Cumulative variance](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/PC_Variance.png?raw=true)
 
-When examining covariance, three principal components captured 82.6% of explained variance.
-
-  
-![Variance matrix](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Figure_4.png?raw=true)
-
- 
-Coffee from all countries clustered together with Mexico (red dots) least amount of clustering.
-
-![PCA](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/Figure_6.png)
+There were no distinct grouping seen in the PCA
+![PCA](https://github.com/timmy224/Coffee_Quality_Analysis/blob/master/images/PCA.png?raw=true)
 
 ## Discussion
-What did I learn?
-Coffee from around the world are ranked very similarly or that I need to expand my dataset to better discriminate coffee from different countries. 
+After analyzing this dataset, Mexico has the most number of coffee quality reviews with a total of 236 reviews. When examining coffee qualities, Ethiopia seems to have the highest quality of coffee based on 44 coffee quality reviews. When trying to determine whether distinct groups of coffee from different countries can be determined from coffee quality ratings, the PCA failed to capture enough variance from the given data to suggest conclusions to do so. 
 
 ## Future Directions
-Will webscrape 2019 (most recent) dataset and use more features.
+Because other parts (non-quality measures) of the dataset were vastly inconsistent/incomplete, I omitted incorporating them into my analysis. I may consider incorporating them to help provide extra data for the PCA to work with to hopefully capture more variance. 
+

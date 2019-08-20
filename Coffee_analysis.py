@@ -78,7 +78,7 @@ ax.set_xticklabels(labels=columns)
 
 # Check distribution of values for each category
 fig, ax = plt.subplots(2, 5, figsize=(16, 8), sharex=False, sharey=False)
-ax.set_title('All Coffee Quality Distribution')
+.set_title('All Coffee Quality Distribution')
 for i in range(1,11):
     fig.add_subplot(2, 5, i)
     sns.distplot(boxplot_data[i-1], kde=True)
@@ -124,7 +124,7 @@ Ethiopia                 44
 Tanzania                 40
 """
 
-# Which country has the best quality coffee (top 10)?
+# Which country (from top 10 suppliers) has the best quality coffee?
 top_10 = df_barchart['Country'][0:10]
 country_dict = {}
 
@@ -173,39 +173,8 @@ df_log_transform = pd.DataFrame(df['Country'], columns=['Country'])
 for each in columns:
     df_log_transform[each] = np.log(df[each] + 1)
 
-# check for normality
-shapiro = {} # for Shapiro-Wilks
-normaltest = {} # for D'Agostino-Pearson
-
-for country in top_10:
-    shapiro[country] = {}
-    normaltest[country] = {}
-    for col in columns: 
-        shapiro[country][col] = stats.shapiro(df_log_transform[df_log_transform['Country'] == country][col])
-        normaltest[country][col] = stats.normaltest(df_log_transform[df_log_transform['Country'] == country][col])
-
-        print(country, col)
-        shapiro_calc_p = shapiro[country][col][1]
-        if shapiro_calc_p > 0.05:
-            print(round(shapiro_calc_p, 3),
-                'Gaussian dist. - fail to reject Shapiro-Wilks H0')
-        else:
-            print(round(shapiro_calc_p, 3),
-                'Non-Gaussian dist. - reject Shapiro-Wilks H0')
-        
-        normaltest_calc_p = normaltest[country][col][1]
-        if normaltest_calc_p > 0.05:
-            print(round(normaltest_calc_p, 3), 
-                        'Gaussian dist. - fail to reject D\'Agostino-Pearson H0')
-        else:
-            print(round(normaltest_calc_p, 3),
-                        'Non-Gaussian dist. - reject D\'Agostino-Pearson H0')
-
-        print()
-
 # PCA 
 features = columns
-
 X = df_log_transform.iloc[:, 1:].values
 Y = df_log_transform.iloc[:, 0].values
 # standardize data for mean of 0, variance of 1 
