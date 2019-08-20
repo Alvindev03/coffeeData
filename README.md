@@ -1,10 +1,14 @@
 # Coffee Quality Analysis
 Welcome to my Coffee Quality Analysis project!
 
-The dataset for this project was taken from [jldbc](https://github.com/jldbc/coffee-quality-database). I wanted to practice my data analysis skills and decided to use this particular dataset to understand if coffee reviews from different parts of the world differ.
+## Motivation
+This was my first personal project to help teach myself how to analyze data in Python. I wanted to practice my data analysis skills and decided to use this particular dataset to understand if coffee reviews from different parts of the world differ. 
 
 ## Data
-The data was collected in 2018 and I focused on these particular measures of quality (features):
+The dataset for this project was taken from [jldbc](https://github.com/jldbc/coffee-quality-database), who collected this in 2018 and I focused on these 
+particular measures of quality (features):
+
+Note: I am only working with arabica (vs. robusta) since it has a larger dataset to work with. 
 
 * Aroma
 * Flavor
@@ -24,8 +28,8 @@ The data was collected in 2018 and I focused on these particular measures of qua
 
 3. Do we need all category ratings to describe the coffee?
 
+4. Is there one quality or few qualities which can predict overall coffee quality?
   
-
 ## Methods
 
 ### Q1: 
@@ -37,7 +41,7 @@ The data was collected in 2018 and I focused on these particular measures of qua
 * Dunn Test: identify different groups
 
 ###  Q3
-* PCA: Reduce dimensions and visualizaition
+* PCA: Reduce dimensions and visualization
 
 ## Results
 
