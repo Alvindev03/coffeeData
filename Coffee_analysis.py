@@ -4,9 +4,6 @@ import numpy as np
 from tabulate import tabulate
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy import stats
-import scikit_posthocs as sp
-from tabulate import tabulate
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from mpl_toolkits import mplot3d
@@ -78,7 +75,7 @@ ax.set_xticklabels(labels=columns)
 
 # Check distribution of values for each category
 fig, ax = plt.subplots(2, 5, figsize=(16, 8), sharex=False, sharey=False)
-.set_title('All Coffee Quality Distribution')
+ax.set_title('All Coffee Quality Distribution')
 for i in range(1,11):
     fig.add_subplot(2, 5, i)
     sns.distplot(boxplot_data[i-1], kde=True)
