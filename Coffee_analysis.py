@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from mpl_toolkits import mplot3d
 
 # Load csv file and read number of lines 
 with open('arabica_data_cleaned.csv') as csv_file:
@@ -87,7 +86,8 @@ for i in range(1,11):
 """
 Since there are a lot of outliers in the values for each category, median would 
 be a better metric than average. Many of the categories are left-skewed, except
-for Uniformity, Clean Cup, and Sweetness"""
+for Uniformity, Clean Cup, and Sweetness
+"""
 
 # Which are the top 10 countries with the most reviews?
 df['Country'].replace('Tanzania, United Republic Of', 'Tanzania', inplace=True)
